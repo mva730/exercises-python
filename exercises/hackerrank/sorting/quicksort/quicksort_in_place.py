@@ -13,6 +13,10 @@ def quick_sort(arr, hi, lo):
     quick_sort(arr, hi, left_index)
 
 
+arr = [int(i) for i in '9 8 6 7 3 5 4 1 2'.split()]
+quick_sort(arr, len(arr) - 1, 0)
+print(arr)
+
 # def quick_sort(arr, hi, lo):
 #     if lo >= hi or lo < 0:
 #         return
@@ -29,8 +33,3 @@ def quick_sort(arr, hi, lo):
 #
 #     quick_sort(arr, i - 1, lo)
 #     quick_sort(arr, hi, i + 1)
-
-
-arr = [int(i) for i in '9 8 6 7 3 5 4 1 2'.split()]
-quick_sort(arr, len(arr) - 1, 0)
-print(arr)
