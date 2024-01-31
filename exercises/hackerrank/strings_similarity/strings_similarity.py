@@ -6,26 +6,33 @@ def string_similarity(str):
             result += len(str)
             continue
 
-        # j = 0
-        # check = suffix
-        # while (ind := str.find(check)) != 0 and j < len(suffix):
-        #     j += 1
-        #     check = check[:-j]
-        # else:
-        #     result += len(check)
+        if suffix[0] != str[0]:
+            continue
 
-        for i in range(1, len(suffix)):
+        sub_str = str
+        sub_suffix = suffix
+        j = 2
+        end = len(suffix)
+        while sub_str != sub_suffix:
+            end = len(sub_str) // j
+            sub_str = sub_str[:end]
+            sub_suffix = sub_suffix[:end]
+
+        counter = 0
+        for i in range(end, len(suffix)):
             if suffix[i] == str[i]:
-                result += len(suffix)
+                counter += 1
             else:
                 break
+
+        result += counter + end
 
     # print(suffixies)
     return result
 
 
-string_similarity('ababaa')
-print()
+# string_similarity('ababaa')
+# print()
 if __name__ == '__main__':
     s = ''
     result = ''
