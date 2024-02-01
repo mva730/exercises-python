@@ -6,28 +6,21 @@ start_time = time.time()
 def string_similarity(str):
     suffixies = [str[i:] for i in range(0, len(str))]
     result = 0
-
     for suffix in suffixies:
         if str == suffix:
             result += len(str)
             continue
 
-        if suffix[0] != str[0]:
-            continue
+        counter = 0
+        for i in range(0, len(suffix)):
+            if suffix[i] == str[i]:
+                counter += 1
+            else:
+                break
 
-        result += find(suffix, str, len(suffix))
+        result += counter
 
     return result
-
-
-def find(suffix, str, length):
-    if str[:length] == suffix[:length]:
-        while length < len(suffix) and str[length] == suffix[length]:
-            length += 1
-        return length
-    else:
-        length = length // 2
-        return find(suffix, str, length)
 
 
 if __name__ == '__main__':

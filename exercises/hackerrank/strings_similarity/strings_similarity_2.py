@@ -15,19 +15,28 @@ def string_similarity(str):
         if suffix[0] != str[0]:
             continue
 
-        result += find(suffix, str, len(suffix))
+        counter = find(suffix, str, 0, len(suffix))
+        result += counter
 
     return result
 
 
-def find(suffix, str, length):
-    if str[:length] == suffix[:length]:
-        while length < len(suffix) and str[length] == suffix[length]:
-            length += 1
-        return length
+def find(suffix, str, left_bound, right_bound):
+    middle = (right_bound - left_bound) // 2
+
+    left = [left_bound, middle]
+    right = [middle + 1, right_bound + 1]
+
+    leftStr = str[left[0]:left[1]]
+    leftSuff = suffix[left[0]:left[1]]
+    nextToLeftStr = str[left[0]:left[1] + 1]
+    nextToLeftSuff = suffix[left[0]:left[1] + 1]
+    if leftStr == leftSuff:
+        if nextToLeftStr != nextToLeftSuff:
+            return left[1]
+        return find(suffix, str, right[0], right[1])
     else:
-        length = length // 2
-        return find(suffix, str, length)
+        return find(suffix, str, left[0], left[1])
 
 
 if __name__ == '__main__':
