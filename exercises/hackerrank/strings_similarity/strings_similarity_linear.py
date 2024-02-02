@@ -23,6 +23,9 @@ def string_similarity(str):
     return result
 
 
+print(string_similarity('aabaabaabaaa'))
+print(str)
+
 if __name__ == '__main__':
     s = ''
     result = ''

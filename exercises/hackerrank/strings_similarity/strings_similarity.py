@@ -15,9 +15,14 @@ def string_similarity(str):
         if suffix[0] != str[0]:
             continue
 
-        result += find(suffix, str, len(suffix))
+        counter = find(suffix, str, len(suffix))
+        result += counter
 
     return result
+
+
+print(string_similarity('aabaabaab'))
+print(str)
 
 
 def find(suffix, str, length):
