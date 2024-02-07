@@ -1,3 +1,8 @@
+import time
+
+start_time = time.time()
+
+
 def z_algo(s):
     result = length = len(s)
     right = 0
@@ -130,9 +135,10 @@ def virus_indices(dna, v):
     right_indices = kmp_search(v_right, dna)
 
     left_indices = [left_index for left_index in left_indices if
-                    left_index + len(v) <= len(dna) and left_index]
+                    left_index + len(v) <= len(dna)]
+
     right_indices = [right_index for right_index in right_indices if
-                     right_index - len(v_left) >= 0 and right_index]
+                     right_index - len(v_left) >= 0]
 
     res = []
     for idx in left_indices:
@@ -214,3 +220,5 @@ if __name__ == '__main__':
 #         print('No Match!')
 #     else:
 #         print(' '.join(sorted(result, key=int)))
+
+print("--- %s seconds ---" % (time.time() - start_time))
