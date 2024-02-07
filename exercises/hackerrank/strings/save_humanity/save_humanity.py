@@ -59,23 +59,46 @@ def kmp_search(pat, txt):
     return r
 
 
-def soft_compare(idx, part_to_compare, original_str, leftPartCompare=True):
+def compare_right_part(left_idx, v_right, original_str, v_left_length):
+    mistake = 0
+    res = 0
+    start = v_left_length + left_idx
+
+    for i in range(0, len(v_right)):
+        if mistake > 1:
+            break
+        if v_right[i] == original_str[start + i]:
+            res += 1
+        else:
+            mistake += 1
+            if mistake < 2:
+                res += 1
+
+        if res == len(v_right):
+            return left_idx
+    return -1
+
+
+def compare_left_part(right_idx, v_left, original_str, v_left_length):
+    start = right_idx - v_left_length
+
     mistake = 0
     res = 0
 
-    if leftPartCompare:
-        idx = idx - len(part_to_compare)
-
-    for i in range(0, len(part_to_compare)):
-        if part_to_compare[i] == original_str[idx + i]:
+    for i in range(0, len(v_left)):
+        if mistake > 1:
+            break
+        if v_left[i] == original_str[start + i]:
             res += 1
-        elif part_to_compare[i] != original_str[idx + i] and mistake > 1:
-            return -1
-        elif part_to_compare[i] != original_str[idx + i]:
+        else:
             mistake += 1
-            res += 1
-        if res == len(part_to_compare):
-            return idx
+            if mistake < 2:
+                res += 1
+
+        if res == len(v_left):
+            return start
+
+    return -1
 
 
 def clear_compare(left_idxs, right_idxs, length):
@@ -105,21 +128,22 @@ def virus_indices(dna, v):
 
     left_indices = kmp_search(v_left, dna)
     right_indices = kmp_search(v_right, dna)
-    clear_indices = kmp_search(v, dna)
 
     left_indices = [left_index for left_index in left_indices if
-                    left_index + len(v) <= len(dna) and left_index not in clear_indices]
+                    left_index + len(v) <= len(dna) and left_index]
     right_indices = [right_index for right_index in right_indices if
-                     right_index - len(v_left) >= 0 and right_index not in clear_indices]
+                     right_index - len(v_left) >= 0 and right_index]
 
     res = []
     for idx in left_indices:
-        r = soft_compare(idx, v_right, dna, False)
+        r = compare_right_part(idx, v_right, dna, len(v_left))
+
         if r != -1:
             res.append(r)
 
     for idx in right_indices:
-        r = soft_compare(idx, v_left, dna, True)
+        r = compare_left_part(idx, v_left, dna, len(v_left))
+
         if r != -1:
             res.append(r)
 
@@ -130,11 +154,8 @@ def virus_indices(dna, v):
         return ' '.join([str(i) for i in res])
 
 
-# print(virus_indices(
-#     'abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmno',
-#     'abcdefghijklmnopqrstuvwxyzabcd'))
+# print(virus_indices('abbab', 'ba'))
 print(virus_indices('aardvark', 'ab'))
-print(virus_indices('banana', 'nan'))
 
 # if __name__ == '__main__':
 #     t = int(input().strip())
