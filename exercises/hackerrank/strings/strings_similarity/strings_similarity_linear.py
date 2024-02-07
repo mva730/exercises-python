@@ -32,7 +32,7 @@ if __name__ == '__main__':
     with open('input2.txt') as f:
         lines = f.read().splitlines()
 
-        with open('output.txt', 'w') as fr:
+        with open('../save_humanity/output.txt', 'w') as fr:
             for i in range(1, len(lines), 1):
                 s = lines[i]
 
@@ -45,7 +45,7 @@ if __name__ == '__main__':
         expected_lines.extend(f.readlines())
 
     actual_lines = []
-    with open('output.txt') as fr:
+    with open('../save_humanity/output.txt') as fr:
         actual_lines.extend(fr.readlines())
 
     for i in range(0, len(expected_lines)):
