@@ -3,6 +3,16 @@ import time
 start_time = time.time()
 
 
+def find(suffix, str, length):
+    if str[:length] == suffix[:length]:
+        while length < len(suffix) and str[length] == suffix[length]:
+            length += 1
+        return length
+    else:
+        length = length // 2
+        return find(suffix, str, length)
+
+
 def string_similarity(str):
     suffixies = [str[i:] for i in range(0, len(str))]
     result = 0
@@ -21,19 +31,8 @@ def string_similarity(str):
     return result
 
 
-print(string_similarity('aabaabaab'))
+print(string_similarity('aabaaba'))
 print(str)
-
-
-def find(suffix, str, length):
-    if str[:length] == suffix[:length]:
-        while length < len(suffix) and str[length] == suffix[length]:
-            length += 1
-        return length
-    else:
-        length = length // 2
-        return find(suffix, str, length)
-
 
 if __name__ == '__main__':
     s = ''

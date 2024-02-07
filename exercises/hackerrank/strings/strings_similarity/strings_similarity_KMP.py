@@ -16,8 +16,9 @@ def string_similarity(s):
         print(show)
         print(list(s))
         print([str(i) for i in p])
-        print("i = ", i)
-        print("j = ", j)
+        # print("i = ", i)
+        # print("j = ", j)
+        print()
         show[i] = ' '
         show[j] = ' '
         if s[i] == s[j]:
@@ -30,11 +31,16 @@ def string_similarity(s):
                 i += 1
             else:
                 j = p[j - 1]
-
+    print(num)
+    print(show)
+    print(list(s))
+    print([str(i) for i in p])
+    # print("i = ", i)
+    # print("j = ", j)
     return print(p), print(sum(p))
 
 
-string_similarity('abacababa')
+string_similarity('ababacababab')
 print(str)
 print(str)
 #
