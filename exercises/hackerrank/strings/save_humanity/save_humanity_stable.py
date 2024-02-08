@@ -1,14 +1,3 @@
-#!/bin/python3
-
-
-#
-# Complete the 'virusIndices' function below.
-#
-# The function accepts following parameters:
-#  1. STRING p
-#  2. STRING v
-#
-
 def kmp_algo(s):
     p = [0] * len(s)
     i = 1

@@ -180,9 +180,6 @@ def virus_indices(dna, v):
         return ' '.join([str(i) for i in res])
 
 
-# print(virus_indices('abbab', 'ba'))
-print(virus_indices('aardvark', 'ab'))
-
 # if __name__ == '__main__':
 #     t = int(input().strip())
 #     result = []
@@ -240,5 +237,4 @@ if __name__ == '__main__':
 #         print('No Match!')
 #     else:
 #         print(' '.join(sorted(result, key=int)))
-print(calls)
 print("--- %s seconds ---" % (time.time() - start_time))

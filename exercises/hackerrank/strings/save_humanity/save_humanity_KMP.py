@@ -134,11 +134,9 @@ def virus_indices(dna, v):
     left_indices = kmp_search(v_left, dna)
     right_indices = kmp_search(v_right, dna)
 
-    left_indices = [left_index for left_index in left_indices if
-                    left_index + len(v) <= len(dna)]
+    left_indices = [left_index for left_index in left_indices if left_index + len(v) <= len(dna)]
 
-    right_indices = [right_index for right_index in right_indices if
-                     right_index - len(v_left) >= 0]
+    right_indices = [right_index for right_index in right_indices if right_index - len(v_left) >= 0]
 
     res = []
     for idx in left_indices:
@@ -159,9 +157,6 @@ def virus_indices(dna, v):
     else:
         return ' '.join([str(i) for i in res])
 
-
-# print(virus_indices('abbab', 'ba'))
-print(virus_indices('aardvark', 'ab'))
 
 # if __name__ == '__main__':
 #     t = int(input().strip())
