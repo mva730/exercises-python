@@ -1,4 +1,6 @@
-def isValid1(s):
+# https://www.hackerrank.com/challenges/sherlock-and-valid-string/problem
+
+def isValid(s):
     dict = {}
     max_val = 0
     for c in s:
@@ -9,24 +11,29 @@ def isValid1(s):
             if dict[c] > max_val:
                 max_val = dict[c]
 
-    if len(set(dict.values())) == 1:
+    values_set = set(dict.values())
+
+    if len(values_set) == 1:
         return print('YES')
 
-    if len(set(dict.values())) > 2:
+    if len(values_set) > 2:
         return print('NO')
 
-    if len(set(dict.values())) == 2:
-        values = list(set(dict.values()))
+    if len(values_set) == 2:
+
+        values = list(values_set)
 
         if abs(values[1] - values[0]) > 1:
-            return print('NO')
+            if values.count(1) == 0 or list(dict.values()).count(1) > 1:
+                return print('NO')
 
         max_val_values_num = [(k, v) for k, v in dict.items() if v == max_val]
 
-        if len(max_val_values_num) == 1 or len(max_val_values_num) == len(dict) - 1:
+        # last_value = [i for i in values if values != max_val][0]
+        if len(max_val_values_num) == 1 or (len(max_val_values_num) == len(dict) - 1 and sorted(values)[0] == 1):
             return print('YES')
 
     return print('NO')
 
 
-isValid1('aabbccddeefghi')
+isValid('aaabbbcc')
