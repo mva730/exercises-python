@@ -31,6 +31,14 @@ def z_search(text, pattern):
     return res
 
 
+genes = 'a b c aa d b'.split(' ')
+health = list(map(int, ('1 2 3 4 5 6'.split(' '))))
+
+print(genes)
+print(health)
+print()
+
+
 def dna_health(genes, health, strand, first, last):
     genes_dict = {}
     genes = genes.split()
