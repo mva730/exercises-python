@@ -40,18 +40,43 @@ def get_health_sum(word, tree, first, last):
         node = tree
         while j < len(word) and word[j] in node.children:
             node = node.children[word[j]]
-            health_sum += get_sum_in_range(node.data, first, last)
-            j += 1
+            if node.data:
+                health_sum += get_sum_in_range(node.data, first, last)
+                j += 1
 
     return health_sum
 
 
+# def get_sum_in_range(data, first, last):
+#     h = 0
+#
+#     for idx, health in data.items():
+#         if first <= idx <= last:
+#             h += health
+#
+#     return h
+
+
 def get_sum_in_range(data, first, last):
     h = 0
+    low_bound = 0
+    l = 0
+    data_list = list(data.items())
+    r = len(data_list) - 1
 
-    for idx, health in data.items():
-        if first <= idx <= last:
-            h += health
+    while l <= r:
+        m = (l + r) >> 1
+
+        if data_list[m][0] < first:
+            l = m + 1
+            low_bound = l
+        else:
+            r = m - 1
+            low_bound = m
+
+    while low_bound < len(data_list) and data_list[low_bound][0] <= last:
+        h += data_list[low_bound][1]
+        low_bound += 1
 
     return h
 
