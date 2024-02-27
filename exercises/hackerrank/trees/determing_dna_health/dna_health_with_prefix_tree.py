@@ -8,7 +8,7 @@ class PrefixTree:
     def __init__(self, key):
         self.key = key
         self.children = {}
-        self.data = {}
+        self.data = []
 
     def __repr__(self):
         return f"{self.children}"
@@ -26,7 +26,7 @@ def create_tree(genes, health):
                 node.children[char] = PrefixTree(char)
             node = node.children[char]
 
-        node.data[i] = health[i]
+        node.data.append([i, health[i]])
     print("Tree build time --- %s seconds ---" % (time.time() - start_time))
     return tree
 
@@ -42,40 +42,40 @@ def get_health_sum(word, tree, first, last):
             node = node.children[word[j]]
             if node.data:
                 health_sum += get_sum_in_range(node.data, first, last)
-                j += 1
+            j += 1
 
     return health_sum
 
 
-# def get_sum_in_range(data, first, last):
-#     h = 0
-#
-#     for idx, health in data.items():
-#         if first <= idx <= last:
-#             h += health
-#
-#     return h
+def get_sum_in_range7(data, first, last):
+    h = 0
+
+    for item in data:
+        idx, health = item[0], item[1]
+        if first <= idx <= last:
+            h += health
+
+    return h
 
 
 def get_sum_in_range(data, first, last):
     h = 0
     low_bound = 0
     l = 0
-    data_list = list(data.items())
-    r = len(data_list) - 1
+    r = len(data) - 1
 
     while l <= r:
         m = (l + r) >> 1
 
-        if data_list[m][0] < first:
+        if data[m][0] < first:
             l = m + 1
             low_bound = l
         else:
             r = m - 1
             low_bound = m
 
-    while low_bound < len(data_list) and data_list[low_bound][0] <= last:
-        h += data_list[low_bound][1]
+    while low_bound < len(data) and data[low_bound][0] <= last:
+        h += data[low_bound][1]
         low_bound += 1
 
     return h
