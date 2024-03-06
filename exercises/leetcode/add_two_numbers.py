@@ -1,10 +1,6 @@
 from typing import Optional
 
-
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+from exercises.leetcode._list_node import ListNode, makeNodeList, print_list
 
 
 def addTwoNumbers(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
@@ -55,25 +51,26 @@ def addTwoNumbers(l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[Li
     return base
 
 
-def makeNodeList(arr) -> Optional[ListNode]:
+def addTwoNumbers2(l1, l2):
     base = ListNode()
-    r = base
-    for i in range(len(arr)):
-        r.val = arr[i]
-        if i + 1 < len(arr):
-            r.next = ListNode()
-            r = r.next
-        else:
-            r.next = None
+    current = base
+    while l1 or l2:
+        v1 = l1 and l1.val or 0
+        v2 = l2 and l2.val or 0
+
+        l1 = l1 and l1.next
+        l2 = l2 and l2.next
+
+        sum_result = v1 + v2 + current.val
+        if sum_result > 9:
+            current.next = ListNode(1)
+        elif l1 or l2:
+            current.next = ListNode()
+
+        current.val = sum_result % 10
+        current = current.next
 
     return base
-
-
-def print_list(l):
-    while l:
-        print(l.val, end=' ')
-        l = l.next
-    print()
 
 
 l1 = [9, 9, 9, 9, 9, 9, 9]
