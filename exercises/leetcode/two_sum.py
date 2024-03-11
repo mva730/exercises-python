@@ -36,4 +36,4 @@ def twoSum(nums, target):
     return []
 
 
-print(twoSum([2, 7, 11, 15], 9))
+print(twoSum([7, 7, 2, 11, 15], 9))
