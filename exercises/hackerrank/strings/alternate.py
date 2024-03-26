@@ -15,16 +15,17 @@ def alternate(s):
                 res += ch
         container.append(res)
 
+    cont = container.copy()
     for string in container:
         prev = string[0]
         for i in range(1, len(string)):
             if prev == string[i]:
-                container.remove(string)
+                cont.remove(string)
                 break
             prev = string[i]
             i += 1
 
-    return max(container, key=len)
+    return max(cont, key=len, default=0)
 
     # strings_container = []
     # for char_to_remove in set_of_chars:
